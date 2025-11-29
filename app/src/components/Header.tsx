@@ -17,19 +17,30 @@ export default function Header() {
 	const [isVisible, setIsVisible] = useState(false);
 
 	// Hide header on homepage until user scrolls past the gallery
+	// Once visible, it stays visible until page refresh
 	useEffect(() => {
+		// On non-homepage routes, always show header
+		if (pathname !== '/') {
+			setIsVisible(true);
+			return;
+		}
+
+		// If already visible, don't add scroll listener (keep it visible)
+		if (isVisible) {
+			return;
+		}
+
 		const handleScroll = () => {
-			if (pathname === '/') {
-				setIsVisible(window.scrollY > window.innerHeight * 0.8);
-			} else {
+			if (window.scrollY > window.innerHeight * 0.8) {
 				setIsVisible(true);
+				// Remove listener once visible - header stays visible
+				window.removeEventListener('scroll', handleScroll);
 			}
 		};
 
-		handleScroll();
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
-	}, [pathname]);
+	}, [pathname, isVisible]);
 
 	// Don't show header on admin pages
 	if (pathname?.startsWith('/admin') || pathname === '/login') {
