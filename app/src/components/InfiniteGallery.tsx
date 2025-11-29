@@ -179,6 +179,10 @@ function GalleryScene({
 	const [scrollVelocity, setScrollVelocity] = useState(0);
 	const [autoPlay, setAutoPlay] = useState(true);
 	const lastInteraction = useRef(Date.now());
+	
+	// Touch tracking refs
+	const touchStartY = useRef<number | null>(null);
+	const lastTouchY = useRef<number | null>(null);
 
 	// Use refs to avoid stale closure issues
 	const lockScrollRef = useRef(lockScroll);
@@ -309,17 +313,74 @@ function GalleryScene({
 		[speed, oneRotationDistance]
 	);
 
+	// Touch event handlers for mobile
+	const handleTouchStart = useCallback(
+		(event: TouchEvent) => {
+			if (!lockScrollRef.current) return;
+			
+			const touch = event.touches[0];
+			touchStartY.current = touch.clientY;
+			lastTouchY.current = touch.clientY;
+			setAutoPlay(false);
+			lastInteraction.current = Date.now();
+		},
+		[]
+	);
+
+	const handleTouchMove = useCallback(
+		(event: TouchEvent) => {
+			if (!lockScrollRef.current) return;
+			if (touchStartY.current === null || lastTouchY.current === null) return;
+			
+			event.preventDefault();
+			
+			const touch = event.touches[0];
+			const deltaY = lastTouchY.current - touch.clientY;
+			lastTouchY.current = touch.clientY;
+			
+			// Convert touch movement to scroll velocity (swipe up = scroll forward)
+			const scrollDelta = deltaY * 0.03 * speed;
+			setScrollVelocity((prev) => prev + scrollDelta);
+			
+			// Track progress for completion
+			if (scrollDelta > 0 && !hasCompletedRef.current) {
+				totalScrollDistanceRef.current += scrollDelta * 10;
+				
+				if (totalScrollDistanceRef.current >= oneRotationDistance * REQUIRED_ROTATIONS) {
+					hasCompletedRef.current = true;
+					onScrollCompleteRef.current?.();
+				}
+			}
+		},
+		[speed, oneRotationDistance]
+	);
+
+	const handleTouchEnd = useCallback(
+		() => {
+			touchStartY.current = null;
+			lastTouchY.current = null;
+			lastInteraction.current = Date.now();
+		},
+		[]
+	);
+
 	useEffect(() => {
 		const canvas = document.querySelector('canvas');
 		if (canvas) {
 			canvas.addEventListener('wheel', handleWheel, { passive: false });
+			canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+			canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+			canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
 			document.addEventListener('keydown', handleKeyDown);
 			return () => {
 				canvas.removeEventListener('wheel', handleWheel);
+				canvas.removeEventListener('touchstart', handleTouchStart);
+				canvas.removeEventListener('touchmove', handleTouchMove);
+				canvas.removeEventListener('touchend', handleTouchEnd);
 				document.removeEventListener('keydown', handleKeyDown);
 			};
 		}
-	}, [handleWheel, handleKeyDown]);
+	}, [handleWheel, handleKeyDown, handleTouchStart, handleTouchMove, handleTouchEnd]);
 
 	// Auto-play after 3 seconds of inactivity
 	useEffect(() => {
