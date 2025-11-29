@@ -257,21 +257,22 @@ function GalleryScene({
 	}, [depthRange, spatialPositions, totalImages, visibleCount]);
 
 	// Detect if mobile device (check for touch capability and screen width)
-	const [isMobile, setIsMobile] = useState(false);
+	const isMobileRef = useRef(false);
+	const requiredRotationsRef = useRef(2);
 	
 	useEffect(() => {
 		const checkMobile = () => {
 			const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 			const isSmallScreen = window.innerWidth < 768;
-			setIsMobile(hasTouchScreen && isSmallScreen);
+			isMobileRef.current = hasTouchScreen && isSmallScreen;
+			// 2 rotations for desktop, 3 for mobile
+			requiredRotationsRef.current = isMobileRef.current ? 3 : 2;
 		};
 		checkMobile();
 		window.addEventListener('resize', checkMobile);
 		return () => window.removeEventListener('resize', checkMobile);
 	}, []);
 
-	// 2 rotations for desktop, 3 for mobile
-	const REQUIRED_ROTATIONS = isMobile ? 3 : 2;
 	const oneRotationDistance = depthRange * 1.5;
 
 	const handleWheel = useCallback(
@@ -296,7 +297,7 @@ function GalleryScene({
 			if (scrollDelta > 0 && !hasCompletedRef.current) {
 				totalScrollDistanceRef.current += scrollDelta * 10;
 
-				if (totalScrollDistanceRef.current >= oneRotationDistance * REQUIRED_ROTATIONS) {
+				if (totalScrollDistanceRef.current >= oneRotationDistance * requiredRotationsRef.current) {
 					hasCompletedRef.current = true;
 					setAutoPlay(true); // Immediately enable autoplay on completion
 					onScrollCompleteRef.current?.();
@@ -371,7 +372,7 @@ function GalleryScene({
 			if (scrollDelta > 0 && !hasCompletedRef.current) {
 				totalScrollDistanceRef.current += scrollDelta * 10;
 				
-				if (totalScrollDistanceRef.current >= oneRotationDistance * REQUIRED_ROTATIONS) {
+				if (totalScrollDistanceRef.current >= oneRotationDistance * requiredRotationsRef.current) {
 					hasCompletedRef.current = true;
 					setAutoPlay(true); // Immediately enable autoplay on completion
 					onScrollCompleteRef.current?.();
