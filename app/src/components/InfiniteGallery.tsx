@@ -272,7 +272,10 @@ function GalleryScene({
 
 			const scrollDelta = event.deltaY * 0.01 * speed;
 			setScrollVelocity((prev) => prev + scrollDelta);
-			setAutoPlay(false);
+			// Only turn off autoplay if gallery hasn't been completed yet
+			if (!hasCompletedRef.current) {
+				setAutoPlay(false);
+			}
 			lastInteraction.current = Date.now();
 
 			// Only count forward scrolling toward completion
@@ -281,6 +284,7 @@ function GalleryScene({
 
 				if (totalScrollDistanceRef.current >= oneRotationDistance * REQUIRED_ROTATIONS) {
 					hasCompletedRef.current = true;
+					setAutoPlay(true); // Immediately enable autoplay on completion
 					onScrollCompleteRef.current?.();
 				}
 			}
@@ -294,11 +298,15 @@ function GalleryScene({
 
 			if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
 				setScrollVelocity((prev) => prev - 2 * speed);
-				setAutoPlay(false);
+				if (!hasCompletedRef.current) {
+					setAutoPlay(false);
+				}
 				lastInteraction.current = Date.now();
 			} else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
 				setScrollVelocity((prev) => prev + 2 * speed);
-				setAutoPlay(false);
+				if (!hasCompletedRef.current) {
+					setAutoPlay(false);
+				}
 				lastInteraction.current = Date.now();
 
 				if (!hasCompletedRef.current) {
@@ -321,7 +329,10 @@ function GalleryScene({
 			const touch = event.touches[0];
 			touchStartY.current = touch.clientY;
 			lastTouchY.current = touch.clientY;
-			setAutoPlay(false);
+			// Only turn off autoplay if gallery hasn't been completed yet
+			if (!hasCompletedRef.current) {
+				setAutoPlay(false);
+			}
 			lastInteraction.current = Date.now();
 		},
 		[]
@@ -348,6 +359,7 @@ function GalleryScene({
 				
 				if (totalScrollDistanceRef.current >= oneRotationDistance * REQUIRED_ROTATIONS) {
 					hasCompletedRef.current = true;
+					setAutoPlay(true); // Immediately enable autoplay on completion
 					onScrollCompleteRef.current?.();
 				}
 			}
@@ -382,10 +394,13 @@ function GalleryScene({
 		}
 	}, [handleWheel, handleKeyDown, handleTouchStart, handleTouchMove, handleTouchEnd]);
 
-	// Auto-play after 3 seconds of inactivity
+	// Auto-play after 3 seconds of inactivity, or immediately if gallery already completed
 	useEffect(() => {
 		const interval = setInterval(() => {
-			if (Date.now() - lastInteraction.current > 3000) {
+			// If gallery has been completed, always autoplay immediately
+			if (hasCompletedRef.current) {
+				setAutoPlay(true);
+			} else if (Date.now() - lastInteraction.current > 3000) {
 				setAutoPlay(true);
 			}
 		}, 1000);
