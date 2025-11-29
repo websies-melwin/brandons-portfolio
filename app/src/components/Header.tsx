@@ -56,7 +56,7 @@ export default function Header() {
 						href="/" 
 						className="text-white font-serif text-lg tracking-tight hover:opacity-80 transition-opacity"
 					>
-						Brandon
+						Brandon's Portfolio
 					</Link>
 
 					{/* Desktop Navigation Links */}
