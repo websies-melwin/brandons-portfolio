@@ -256,8 +256,22 @@ function GalleryScene({
 		}));
 	}, [depthRange, spatialPositions, totalImages, visibleCount]);
 
-	// 2 full rotations worth of scroll distance
-	const REQUIRED_ROTATIONS = 2;
+	// Detect if mobile device (check for touch capability and screen width)
+	const [isMobile, setIsMobile] = useState(false);
+	
+	useEffect(() => {
+		const checkMobile = () => {
+			const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+			const isSmallScreen = window.innerWidth < 768;
+			setIsMobile(hasTouchScreen && isSmallScreen);
+		};
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
+
+	// 2 rotations for desktop, 3 for mobile
+	const REQUIRED_ROTATIONS = isMobile ? 3 : 2;
 	const oneRotationDistance = depthRange * 1.5;
 
 	const handleWheel = useCallback(
