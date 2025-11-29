@@ -54,10 +54,7 @@ export default function AdminPage() {
   }, []);
 
   const resetForm = () => {
-    setFormData({
-      title: "",
-      description: "",
-    });
+    setFormData({ title: "", description: "" });
     setMediaItems([]);
     setEditingProject(null);
     setShowForm(false);
@@ -68,8 +65,6 @@ export default function AdminPage() {
       title: project.title,
       description: project.description || "",
     });
-
-    // Reconstruct media items from project data
     const items: MediaItem[] = [];
     if (project.media_url) {
       items.push({ url: project.media_url, type: project.media_type });
@@ -78,19 +73,16 @@ export default function AdminPage() {
       items.push(...project.additional_media);
     }
     setMediaItems(items);
-
     setEditingProject(project);
     setShowForm(true);
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this project?")) return;
-
     const { error } = await supabase
       .from("portfolio_projects")
       .delete()
       .eq("id", id);
-
     if (error) {
       alert("Error deleting project: " + error.message);
     } else {
@@ -103,20 +95,16 @@ export default function AdminPage() {
       const fileExt = file.name.split(".").pop();
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
       const filePath = `projects/${fileName}`;
-
       const { error: uploadError } = await supabase.storage
         .from("media")
         .upload(filePath, file);
-
       if (uploadError) {
         alert("Error uploading file: " + uploadError.message);
         return null;
       }
-
       const { data: { publicUrl } } = supabase.storage
         .from("media")
         .getPublicUrl(filePath);
-
       return publicUrl;
     } catch (err) {
       alert("Error uploading file: " + (err as Error).message);
@@ -127,22 +115,14 @@ export default function AdminPage() {
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     const isVideo = file.type.startsWith("video/");
     const type: "image" | "video" = isVideo ? "video" : "image";
-
-    // Set uploading state (use length as index for "adding new")
     setUploadingIndex(mediaItems.length);
-
     const url = await uploadFile(file);
-
     if (url) {
       setMediaItems([...mediaItems, { url, type }]);
     }
-
     setUploadingIndex(null);
-
-    // Reset the input so same file can be selected again
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -154,18 +134,13 @@ export default function AdminPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (mediaItems.length === 0) {
       alert("Please add at least one image or video");
       return;
     }
-
     setSaving(true);
-
-    // First item is the main media (thumbnail)
     const mainMedia = mediaItems[0];
     const additionalMedia = mediaItems.slice(1);
-
     const projectData = {
       title: formData.title,
       slug: formData.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
@@ -182,38 +157,29 @@ export default function AdminPage() {
         .from("portfolio_projects")
         .update(projectData)
         .eq("id", editingProject.id);
-
-      if (error) {
-        alert("Error updating project: " + error.message);
-      }
+      if (error) alert("Error updating project: " + error.message);
     } else {
       const { error } = await supabase
         .from("portfolio_projects")
         .insert(projectData);
-
-      if (error) {
-        alert("Error creating project: " + error.message);
-      }
+      if (error) alert("Error creating project: " + error.message);
     }
-
     setSaving(false);
     resetForm();
     fetchProjects();
   };
 
   if (loading) {
-    return <div className="text-zinc-500">Loading projects...</div>;
+    return <div className="text-zinc-400">Loading projects...</div>;
   }
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100">
-          Projects
-        </h2>
+      <div className="flex items-center justify-between mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl font-serif text-white">Projects</h2>
         <button
           onClick={() => setShowForm(true)}
-          className="px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+          className="px-4 sm:px-5 py-2 sm:py-2.5 bg-white text-black text-sm font-medium rounded-full hover:bg-zinc-200 active:bg-zinc-300 transition-colors"
         >
           Add Project
         </button>
@@ -221,16 +187,16 @@ export default function AdminPage() {
 
       {/* Project Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-zinc-900 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-white/10">
+              <h3 className="text-lg font-serif text-white">
                 {editingProject ? "Edit Project" : "Add New Project"}
               </h3>
             </div>
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1.5">
                   Title *
                 </label>
                 <input
@@ -238,64 +204,56 @@ export default function AdminPage() {
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   required
-                  className="w-full px-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  className="w-full px-4 py-2.5 backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+                <label className="block text-sm font-medium text-zinc-300 mb-1.5">
                   Description
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 resize-none"
+                  className="w-full px-4 py-2.5 backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all resize-none"
                 />
               </div>
 
               {/* Media Upload Section */}
               <div>
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                <label className="block text-sm font-medium text-zinc-300 mb-2">
                   Media {mediaItems.length === 0 && "*"}
                 </label>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3">
+                <p className="text-xs text-zinc-500 mb-3">
                   First image/video will be used as the thumbnail
                 </p>
 
-                {/* Media Items Grid */}
                 <div className="grid grid-cols-3 gap-3 mb-3">
                   {mediaItems.map((item, index) => (
                     <div
                       key={index}
-                      className={`relative aspect-square rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 ${
-                        index === 0 ? "ring-2 ring-zinc-900 dark:ring-zinc-100" : ""
+                      className={`relative aspect-square rounded-xl overflow-hidden bg-white/5 ${
+                        index === 0 ? "ring-2 ring-white" : ""
                       }`}
                     >
                       {item.type === "image" ? (
-                        <img
-                          src={item.url}
-                          alt={`Media ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={item.url} alt={`Media ${index + 1}`} className="w-full h-full object-cover" />
                       ) : (
-                        <video
-                          src={item.url}
-                          className="w-full h-full object-cover"
-                        />
+                        <video src={item.url} className="w-full h-full object-cover" />
                       )}
                       {index === 0 && (
-                        <span className="absolute top-1 left-1 px-1.5 py-0.5 text-[10px] font-medium bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded">
+                        <span className="absolute top-1 left-1 px-2 py-0.5 text-[10px] font-medium bg-white text-black rounded-full">
                           Main
                         </span>
                       )}
-                      <span className="absolute top-1 right-1 px-1.5 py-0.5 text-[10px] font-medium bg-black/50 text-white rounded capitalize">
+                      <span className="absolute top-1 right-1 px-2 py-0.5 text-[10px] font-medium backdrop-blur-xl bg-black/50 text-white rounded-full capitalize">
                         {item.type}
                       </span>
                       <button
                         type="button"
                         onClick={() => removeMediaItem(index)}
-                        className="absolute bottom-1 right-1 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                        className="absolute bottom-1 right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
                       >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -304,7 +262,6 @@ export default function AdminPage() {
                     </div>
                   ))}
 
-                  {/* Add Button */}
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -316,7 +273,7 @@ export default function AdminPage() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploadingIndex !== null}
-                    className="aspect-square rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-600 flex flex-col items-center justify-center text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-500 transition-colors disabled:opacity-50"
+                    className="aspect-square rounded-xl border-2 border-dashed border-white/20 flex flex-col items-center justify-center text-zinc-400 hover:border-white/40 hover:text-zinc-300 transition-colors disabled:opacity-50"
                   >
                     {uploadingIndex !== null ? (
                       <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
@@ -335,22 +292,22 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center">
+              <p className="text-sm text-zinc-500 text-center">
                 Once published, this project will show onto your portfolio
               </p>
 
-              <div className="flex gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+              <div className="flex gap-3 pt-4 border-t border-white/10">
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="flex-1 px-4 py-2 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm font-medium rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                  className="flex-1 px-4 py-2.5 backdrop-blur-xl bg-white/5 border border-white/10 text-white text-sm font-medium rounded-xl hover:bg-white/10 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving || mediaItems.length === 0}
-                  className="flex-1 px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-medium rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-50 transition-colors"
+                  className="flex-1 px-4 py-2.5 bg-white text-black text-sm font-medium rounded-xl hover:bg-zinc-200 disabled:opacity-50 transition-colors"
                 >
                   {saving ? "Saving..." : editingProject ? "Update Project" : "Create Project"}
                 </button>
@@ -362,9 +319,9 @@ export default function AdminPage() {
 
       {/* Projects List */}
       {projects.length === 0 ? (
-        <div className="text-center py-12 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800">
-          <p className="text-zinc-500 dark:text-zinc-400">No projects yet</p>
-          <p className="text-sm text-zinc-400 dark:text-zinc-500 mt-1">
+        <div className="text-center py-12 backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl">
+          <p className="text-zinc-400">No projects yet</p>
+          <p className="text-sm text-zinc-500 mt-1">
             Click &quot;Add Project&quot; to create your first one
           </p>
         </div>
@@ -373,24 +330,16 @@ export default function AdminPage() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800"
+              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl"
             >
               {/* Thumbnail */}
-              <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+              <div className="w-14 h-14 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg sm:rounded-xl overflow-hidden bg-white/5">
                 {project.media_type === "image" ? (
-                  <img
-                    src={project.media_url}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={project.media_url} alt={project.title} className="w-full h-full object-cover" />
                 ) : project.thumbnail_url ? (
-                  <img
-                    src={project.thumbnail_url}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={project.thumbnail_url} alt={project.title} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-zinc-400">
+                  <div className="w-full h-full flex items-center justify-center text-zinc-500">
                     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -401,23 +350,19 @@ export default function AdminPage() {
 
               {/* Info */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-medium text-zinc-900 dark:text-zinc-100 truncate">
-                    {project.title}
-                  </h3>
-                  <span className="px-2 py-0.5 text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded capitalize">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-medium text-white truncate text-sm sm:text-base">{project.title}</h3>
+                  <span className="px-2 py-0.5 text-xs backdrop-blur-xl bg-white/10 text-zinc-300 rounded-full capitalize">
                     {project.media_type}
                   </span>
                   {project.additional_media && project.additional_media.length > 0 && (
-                    <span className="px-2 py-0.5 text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded">
+                    <span className="px-2 py-0.5 text-xs backdrop-blur-xl bg-white/10 text-zinc-300 rounded-full">
                       +{project.additional_media.length} more
                     </span>
                   )}
                 </div>
                 {project.description && (
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 truncate mt-0.5">
-                    {project.description}
-                  </p>
+                  <p className="text-sm text-zinc-400 truncate mt-0.5">{project.description}</p>
                 )}
               </div>
 
@@ -425,7 +370,7 @@ export default function AdminPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleEdit(project)}
-                  className="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                  className="p-2 text-zinc-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
                   title="Edit"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -434,7 +379,7 @@ export default function AdminPage() {
                 </button>
                 <button
                   onClick={() => handleDelete(project.id)}
-                  className="p-2 text-zinc-500 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                  className="p-2 text-zinc-400 hover:text-red-400 hover:bg-red-500/10 rounded-full transition-all"
                   title="Delete"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

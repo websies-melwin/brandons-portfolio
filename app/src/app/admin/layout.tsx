@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { isAdmin } from "@/lib/auth";
 import type { User } from "@supabase/supabase-js";
+import Link from "next/link";
 
 export default function AdminLayout({
   children,
@@ -14,6 +15,7 @@ export default function AdminLayout({
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -48,55 +50,104 @@ export default function AdminLayout({
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950">
-        <div className="text-zinc-500">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="text-zinc-400">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-6">
-              <h1 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+      <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-4 py-3 sm:py-4">
+        <nav className="max-w-6xl mx-auto">
+          <div className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <h1 className="text-white font-serif text-base sm:text-lg">
                 Admin
               </h1>
-              <nav className="flex items-center gap-4">
-                <a
+              <div className="hidden sm:flex items-center gap-1">
+                <Link
                   href="/admin"
-                  className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                  className="px-4 py-2 rounded-full text-sm text-white/80 hover:text-white hover:bg-white/10 transition-all"
                 >
                   Projects
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/"
                   target="_blank"
-                  className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                  className="px-4 py-2 rounded-full text-sm text-white/80 hover:text-white hover:bg-white/10 transition-all"
                 >
                   View Site
-                </a>
-              </nav>
+                </Link>
+              </div>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-zinc-500 dark:text-zinc-400">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <span className="hidden md:inline text-sm text-zinc-400 truncate max-w-[150px]">
                 {user?.email}
               </span>
               <button
                 onClick={handleSignOut}
-                className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                className="hidden sm:block px-4 py-2 rounded-full text-sm text-white/80 hover:text-white hover:bg-white/10 transition-all"
+              >
+                Sign out
+              </button>
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="sm:hidden p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="sm:hidden mt-2 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-2 shadow-lg shadow-black/5">
+              <div className="px-4 py-2 text-xs text-zinc-400 truncate border-b border-white/10 mb-1">
+                {user?.email}
+              </div>
+              <Link
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-4 py-3 rounded-xl text-sm text-white/80 hover:text-white hover:bg-white/10 transition-all"
+              >
+                Projects
+              </Link>
+              <Link
+                href="/"
+                target="_blank"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-4 py-3 rounded-xl text-sm text-white/80 hover:text-white hover:bg-white/10 transition-all"
+              >
+                View Site
+              </Link>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleSignOut();
+                }}
+                className="w-full text-left px-4 py-3 rounded-xl text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all"
               >
                 Sign out
               </button>
             </div>
-          </div>
-        </div>
+          )}
+        </nav>
       </header>
 
       {/* Main content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8">
         {children}
       </main>
     </div>
