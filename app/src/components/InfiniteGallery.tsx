@@ -265,8 +265,8 @@ function GalleryScene({
 			const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 			const isSmallScreen = window.innerWidth < 768;
 			isMobileRef.current = hasTouchScreen && isSmallScreen;
-			// 2 rotations for desktop, 3 for mobile
-			requiredRotationsRef.current = isMobileRef.current ? 3 : 2;
+			// 2 rotations for both desktop and mobile
+			requiredRotationsRef.current = 2;
 		};
 		checkMobile();
 		window.addEventListener('resize', checkMobile);
