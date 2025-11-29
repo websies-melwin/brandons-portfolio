@@ -10,7 +10,7 @@ export default function Home() {
 	const sampleImages = [
 		{ src: 'https://picsum.photos/seed/1/800/600', alt: 'Project 1' },
 		{ src: 'https://picsum.photos/seed/2/800/600', alt: 'Project 2' },
-		{ src: 'https://picsum.photos/seed/3/800/600', alt: 'Project 3' },
+		{ src: 'https://picsum.photos/seed/architecture/800/600', alt: 'Project 3' },
 		{ src: 'https://picsum.photos/seed/4/800/600', alt: 'Project 4' },
 		{ src: 'https://picsum.photos/seed/5/800/600', alt: 'Project 5' },
 		{ src: 'https://picsum.photos/seed/6/800/600', alt: 'Project 6' },
