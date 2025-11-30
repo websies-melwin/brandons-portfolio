@@ -287,20 +287,20 @@ export default function Home() {
 			<section className="bg-zinc-950 px-4 sm:px-6 py-20 sm:py-32">
 				<div className="max-w-7xl mx-auto">
 					{/* Header */}
-					<div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mb-14 sm:mb-20">
+					<div className="grid lg:grid-cols-2 gap-6 lg:gap-16 mb-14 sm:mb-20">
 						<div>
 							<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">Portfolio</p>
 							<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white">
 								Selected <span className="italic">Works</span>
 							</h2>
 						</div>
-						<div className="flex items-end justify-between lg:justify-end">
+						<div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 lg:justify-end">
 							<p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-md lg:hidden">
 								A curated collection of my best work across photography, design, and creative direction.
 							</p>
 							<a 
 								href="/projects" 
-								className="inline-flex items-center gap-3 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 transition-all duration-300"
+								className="inline-flex items-center justify-center gap-3 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 transition-all duration-300 w-full sm:w-auto"
 							>
 								View all
 								<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -314,7 +314,7 @@ export default function Home() {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						{/* Featured Project - Large */}
 						<div className="md:col-span-2 group relative rounded-3xl overflow-hidden cursor-pointer">
-							<div className="aspect-[21/9]">
+							<div className="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9]">
 								<img
 									src="https://picsum.photos/seed/featured-wide/1600/700"
 									alt="Featured Project"
