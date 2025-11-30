@@ -3,28 +3,24 @@
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* Hero Section - Full width with background image like About page */}
-      <section className="relative h-[70vh] sm:h-[80vh] overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://picsum.photos/seed/contact-bg/1600/1000"
-            alt="Contact"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+      {/* Hero Section */}
+      <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-white/10 rounded-full" />
         </div>
         
-        {/* Hero Content */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-12 md:p-16">
-          <div className="max-w-6xl mx-auto">
-            <p className="text-white/60 text-xs sm:text-sm uppercase tracking-widest mb-3">Contact</p>
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-serif text-white mb-4">
-              Let&apos;s <span className="italic">Connect</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-white/80 max-w-2xl">
-              Have a project in mind or just want to say hello? I&apos;d love to hear from you.
-            </p>
-          </div>
+        <div className="max-w-6xl mx-auto relative">
+          <p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">Contact</p>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif text-white mb-6">
+            Let&apos;s <span className="italic">Connect</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl">
+            Have a project in mind or just want to say hello? I&apos;d love to hear from you.
+          </p>
         </div>
       </section>
 
