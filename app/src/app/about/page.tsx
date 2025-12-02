@@ -50,7 +50,7 @@ export default function AboutPage() {
                 emphasis on creating meaningful, impactful imagery.
               </p>
               <p>
-                Based in [Location], I&apos;ve spent years honing my craft and developing 
+                Based in Ho Chi Minh, Vietnam, I&apos;ve spent years honing my craft and developing 
                 a unique visual style that blends modern aesthetics with timeless elegance.
               </p>
               <p>

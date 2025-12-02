@@ -138,7 +138,7 @@ export default function Home() {
 							<div className="space-y-6 text-base sm:text-lg text-zinc-400 leading-relaxed">
 								<p>
 									A creative professional passionate about bringing ideas to life through
-									design, photography, and visual storytelling. Based in [Location], I&apos;ve 
+									design, photography, and visual storytelling. Based in Ho Chi Minh, Vietnam, I&apos;ve 
 									spent years developing a unique visual style.
 								</p>
 								<p>
