@@ -152,14 +152,14 @@ export default function Home() {
 							<div className="grid grid-cols-2 gap-4 pt-4">
 								<div className="aspect-[4/5] rounded-2xl overflow-hidden">
 									<img
-										src="https://picsum.photos/seed/brandon1/600/750"
+										src="/gallery/about-1.jpg"
 										alt="Brandon at work"
 										className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
 									/>
 								</div>
 								<div className="aspect-[4/5] rounded-2xl overflow-hidden mt-8">
 									<img
-										src="https://picsum.photos/seed/brandon2/600/750"
+										src="/gallery/about-2.jpg"
 										alt="Behind the scenes"
 										className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
 									/>
@@ -169,16 +169,16 @@ export default function Home() {
 							{/* Quick Stats */}
 							<div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10">
 								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">5+</p>
+									<p className="text-3xl sm:text-4xl font-serif text-white">3+</p>
 									<p className="text-sm text-zinc-500">Years Experience</p>
 								</div>
 								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">100+</p>
-									<p className="text-sm text-zinc-500">Projects Done</p>
+									<p className="text-3xl sm:text-4xl font-serif text-white">50+</p>
+									<p className="text-sm text-zinc-500">Projects Completed</p>
 								</div>
 								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">50+</p>
-									<p className="text-sm text-zinc-500">Happy Clients</p>
+									<p className="text-3xl sm:text-4xl font-serif text-white">∞</p>
+									<p className="text-sm text-zinc-500">Creative Ideas</p>
 								</div>
 							</div>
 						</div>
