@@ -65,7 +65,7 @@ export default function ContactPage() {
               <div className="pt-8 border-t border-white/10 space-y-4">
                 {/* Email */}
                 <a
-                  href="mailto:brandon@example.com"
+                  href="mailto:brandon.bui04@gmail.com"
                   className="group flex items-center gap-5 p-4 -mx-4 rounded-2xl hover:bg-white/5 transition-all duration-300"
                 >
                   <div className="w-14 h-14 rounded-full backdrop-blur-xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
@@ -75,7 +75,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex-1">
                     <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Email</p>
-                    <p className="text-white text-lg group-hover:translate-x-2 transition-transform duration-300">brandon@example.com</p>
+                    <p className="text-white text-lg group-hover:translate-x-2 transition-transform duration-300">brandon.bui04@gmail.com</p>
                   </div>
                   <svg className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -84,7 +84,7 @@ export default function ContactPage() {
 
                 {/* Instagram */}
                 <a
-                  href="https://instagram.com/brandon"
+                  href="https://www.instagram.com/iamm__brandon/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-5 p-4 -mx-4 rounded-2xl hover:bg-white/5 transition-all duration-300"
@@ -96,7 +96,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex-1">
                     <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Instagram</p>
-                    <p className="text-white text-lg group-hover:translate-x-2 transition-transform duration-300">@brandon</p>
+                    <p className="text-white text-lg group-hover:translate-x-2 transition-transform duration-300">@iamm__brandon</p>
                   </div>
                   <svg className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -130,8 +130,8 @@ export default function ContactPage() {
               &copy; {new Date().getFullYear()} Brandon. All rights reserved.
             </p>
             <div className="flex items-center gap-4 sm:gap-6">
-              <a href="https://instagram.com/brandon" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Instagram</a>
-              <a href="mailto:brandon@example.com" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Email</a>
+              <a href="https://www.instagram.com/iamm__brandon/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Instagram</a>
+              <a href="mailto:brandon.bui04@gmail.com" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Email</a>
               <span className="text-zinc-600">·</span>
               <span className="text-zinc-500 text-xs sm:text-sm">Made by <a href="https://www.websies.co" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">Websies</a></span>
             </div>

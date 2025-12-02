@@ -256,9 +256,8 @@ export default function AboutPage() {
               &copy; {new Date().getFullYear()} Brandon. All rights reserved.
             </p>
             <div className="flex items-center gap-4 sm:gap-6">
-              <a href="#" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Instagram</a>
-              <a href="#" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">LinkedIn</a>
-              <a href="#" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Email</a>
+              <a href="https://www.instagram.com/iamm__brandon/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Instagram</a>
+              <a href="mailto:brandon.bui04@gmail.com" className="text-zinc-400 hover:text-white transition-colors text-xs sm:text-sm">Email</a>
               <span className="text-zinc-600">·</span>
               <span className="text-zinc-500 text-xs sm:text-sm">Made by <a href="https://www.websies.co" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white transition-colors">Websies</a></span>
             </div>
