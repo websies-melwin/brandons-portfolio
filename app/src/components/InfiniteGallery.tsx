@@ -393,20 +393,26 @@ function GalleryScene({
 
 	useEffect(() => {
 		const canvas = document.querySelector('canvas');
+		// Attach wheel to canvas, but touch events to document for better iOS capture
 		if (canvas) {
 			canvas.addEventListener('wheel', handleWheel, { passive: false });
-			canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
-			canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-			canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
-			document.addEventListener('keydown', handleKeyDown);
-			return () => {
-				canvas.removeEventListener('wheel', handleWheel);
-				canvas.removeEventListener('touchstart', handleTouchStart);
-				canvas.removeEventListener('touchmove', handleTouchMove);
-				canvas.removeEventListener('touchend', handleTouchEnd);
-				document.removeEventListener('keydown', handleKeyDown);
-			};
 		}
+		// Touch events on document level for iOS reliability
+		if (lockScrollRef.current) {
+			document.addEventListener('touchstart', handleTouchStart, { passive: true });
+			document.addEventListener('touchmove', handleTouchMove, { passive: false });
+			document.addEventListener('touchend', handleTouchEnd, { passive: true });
+		}
+		document.addEventListener('keydown', handleKeyDown);
+		return () => {
+			if (canvas) {
+				canvas.removeEventListener('wheel', handleWheel);
+			}
+			document.removeEventListener('touchstart', handleTouchStart);
+			document.removeEventListener('touchmove', handleTouchMove);
+			document.removeEventListener('touchend', handleTouchEnd);
+			document.removeEventListener('keydown', handleKeyDown);
+		};
 	}, [handleWheel, handleKeyDown, handleTouchStart, handleTouchMove, handleTouchEnd]);
 
 	// Auto-play after 3 seconds of inactivity, or immediately if gallery already completed

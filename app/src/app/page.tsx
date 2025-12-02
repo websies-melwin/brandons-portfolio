@@ -23,15 +23,43 @@ export default function Home() {
 		window.scrollTo(0, 0);
 	}, []);
 
-	// Lock body scroll while gallery is active
+	// Lock body scroll while gallery is active - iOS-specific fixes
 	useEffect(() => {
 		if (!galleryComplete) {
+			// Standard overflow hidden
 			document.body.style.overflow = 'hidden';
+			// iOS-specific: prevent touch scrolling on body
+			document.body.style.position = 'fixed';
+			document.body.style.width = '100%';
+			document.body.style.height = '100%';
+			document.body.style.top = '0';
+			document.body.style.left = '0';
+			// Prevent touchmove on document while gallery is active
+			const preventScroll = (e: TouchEvent) => {
+				// Only prevent if gallery is not complete
+				if (!galleryComplete) {
+					e.preventDefault();
+				}
+			};
+			document.addEventListener('touchmove', preventScroll, { passive: false });
+			return () => {
+				document.removeEventListener('touchmove', preventScroll);
+			};
 		} else {
 			document.body.style.overflow = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+			document.body.style.height = '';
+			document.body.style.top = '';
+			document.body.style.left = '';
 		}
 		return () => {
 			document.body.style.overflow = '';
+			document.body.style.position = '';
+			document.body.style.width = '';
+			document.body.style.height = '';
+			document.body.style.top = '';
+			document.body.style.left = '';
 		};
 	}, [galleryComplete]);
 
@@ -46,7 +74,7 @@ export default function Home() {
 		<main className="min-h-screen bg-black text-white">
 			{/* 3D Gallery Hero Section - Fixed position when locked */}
 			<section className="relative h-screen bg-black">
-				<div className={galleryComplete ? 'relative h-screen bg-black' : 'fixed inset-0 z-10 bg-black'}>
+				<div className={galleryComplete ? 'relative h-screen bg-black' : 'fixed inset-0 z-50 bg-black'} style={{ touchAction: galleryComplete ? 'auto' : 'none' }}>
 					<InfiniteGallery
 						images={sampleImages}
 						speed={1.2}
