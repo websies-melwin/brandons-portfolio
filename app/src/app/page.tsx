@@ -101,14 +101,23 @@ export default function Home() {
 			{/* About Preview Section */}
 			<section
 				ref={aboutSectionRef}
-				className="min-h-screen bg-black px-4 sm:px-6 py-20 sm:py-32"
+				className="min-h-screen bg-black px-4 sm:px-6 py-20 sm:py-32 relative overflow-hidden"
 			>
-				<div className="max-w-6xl mx-auto">
-					{/* Section Header */}
-					<div className="mb-16 sm:mb-20">
-						<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">About Me</p>
-						<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white mb-6">
-							Hi, I&apos;m <span className="italic">Brandon</span>
+				{/* Subtle Background Elements */}
+				<div className="absolute inset-0 pointer-events-none">
+					<div className="absolute top-1/4 -right-64 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-white/[0.02] to-transparent blur-3xl" />
+					<div className="absolute bottom-1/4 -left-64 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-white/[0.02] to-transparent blur-3xl" />
+				</div>
+
+				<div className="max-w-6xl mx-auto relative">
+					{/* Section Header with Decorative Line */}
+					<div className="mb-16 sm:mb-20 relative">
+						<div className="flex items-center gap-4 mb-4">
+							<div className="h-px w-12 bg-gradient-to-r from-white/50 to-transparent" />
+							<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest">About Me</p>
+						</div>
+						<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white">
+							Hi, I&apos;m <span className="italic bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">Brandon</span>
 						</h2>
 					</div>
 
@@ -116,18 +125,30 @@ export default function Home() {
 						{/* Left - Large Quote */}
 						<div className="lg:sticky lg:top-32">
 							<div className="relative">
-								<span className="absolute -top-8 -left-4 text-8xl sm:text-9xl font-serif text-white/10">&ldquo;</span>
-								<blockquote className="text-2xl sm:text-3xl md:text-4xl font-serif text-white leading-relaxed pl-4 border-l-2 border-white/20">
-									I believe every image tells a story, and my job is to make that story unforgettable.
-								</blockquote>
+								<span className="absolute -top-10 -left-6 text-[10rem] font-serif text-white/[0.03] leading-none select-none">&ldquo;</span>
+								<div className="relative">
+									<div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-white/40 via-white/20 to-transparent" />
+									<blockquote className="text-2xl sm:text-3xl md:text-4xl font-serif text-white leading-relaxed pl-6">
+										I believe every image tells a story, and my job is to make that story <span className="italic text-zinc-300">unforgettable.</span>
+									</blockquote>
+								</div>
+							</div>
+							
+							{/* Location Badge */}
+							<div className="flex items-center gap-2 mt-8 text-zinc-500">
+								<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+								</svg>
+								<span className="text-sm">Ho Chi Minh, Vietnam</span>
 							</div>
 							
 							<a
 								href="/about"
-								className="inline-flex items-center gap-3 mt-10 bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 transition-all duration-300"
+								className="group inline-flex items-center gap-3 mt-8 bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 hover:shadow-lg hover:shadow-white/10 transition-all duration-300"
 							>
-								More about me
-								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<span>More about me</span>
+								<svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
 								</svg>
 							</a>
@@ -138,8 +159,8 @@ export default function Home() {
 							<div className="space-y-6 text-base sm:text-lg text-zinc-400 leading-relaxed">
 								<p>
 									A creative professional passionate about bringing ideas to life through
-									design, photography, and visual storytelling. Based in Ho Chi Minh, Vietnam, I&apos;ve 
-									spent years developing a unique visual style.
+									design, photography, and visual storytelling. I&apos;ve 
+									spent years developing a unique visual style that captures emotion and authenticity.
 								</p>
 								<p>
 									When I&apos;m not behind the camera or designing, you&apos;ll find me exploring 
@@ -148,37 +169,45 @@ export default function Home() {
 								</p>
 							</div>
 
-							{/* Photo Grid */}
+							{/* Photo Grid with Glassmorphic Frames */}
 							<div className="grid grid-cols-2 gap-4 pt-4">
-								<div className="aspect-[4/5] rounded-2xl overflow-hidden">
-									<img
-										src="/gallery/about-1.jpg"
-										alt="Brandon at work"
-										className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-									/>
+								<div className="group relative">
+									<div className="absolute -inset-1 bg-gradient-to-br from-white/20 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+									<div className="relative aspect-[4/5] rounded-2xl overflow-hidden ring-1 ring-white/10">
+										<img
+											src="/gallery/about-1.jpg"
+											alt="Brandon at work"
+											className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+										/>
+										<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+									</div>
 								</div>
-								<div className="aspect-[4/5] rounded-2xl overflow-hidden mt-8">
-									<img
-										src="/gallery/about-2.jpg"
-										alt="Behind the scenes"
-										className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-									/>
+								<div className="group relative mt-8">
+									<div className="absolute -inset-1 bg-gradient-to-br from-white/20 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+									<div className="relative aspect-[4/5] rounded-2xl overflow-hidden ring-1 ring-white/10">
+										<img
+											src="/gallery/about-2.jpg"
+											alt="Behind the scenes"
+											className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+										/>
+										<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+									</div>
 								</div>
 							</div>
 
-							{/* Quick Stats */}
-							<div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10">
-								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">3+</p>
-									<p className="text-sm text-zinc-500">Years Experience</p>
+							{/* Quick Stats with Glassmorphic Cards */}
+							<div className="grid grid-cols-3 gap-3 pt-8">
+								<div className="group backdrop-blur-sm bg-white/[0.03] border border-white/10 rounded-2xl p-4 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300">
+									<p className="text-3xl sm:text-4xl font-serif text-white group-hover:scale-110 transition-transform duration-300 origin-left">3+</p>
+									<p className="text-xs sm:text-sm text-zinc-500 mt-1">Years Experience</p>
 								</div>
-								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">50+</p>
-									<p className="text-sm text-zinc-500">Projects Completed</p>
+								<div className="group backdrop-blur-sm bg-white/[0.03] border border-white/10 rounded-2xl p-4 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300">
+									<p className="text-3xl sm:text-4xl font-serif text-white group-hover:scale-110 transition-transform duration-300 origin-left">50+</p>
+									<p className="text-xs sm:text-sm text-zinc-500 mt-1">Projects Completed</p>
 								</div>
-								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">∞</p>
-									<p className="text-sm text-zinc-500">Creative Ideas</p>
+								<div className="group backdrop-blur-sm bg-white/[0.03] border border-white/10 rounded-2xl p-4 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300">
+									<p className="text-3xl sm:text-4xl font-serif text-white group-hover:scale-110 transition-transform duration-300 origin-left">∞</p>
+									<p className="text-xs sm:text-sm text-zinc-500 mt-1">Creative Ideas</p>
 								</div>
 							</div>
 						</div>
