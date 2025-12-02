@@ -13,6 +13,7 @@ export default function Home() {
 		{ src: '/gallery/gallery-3.jpg', alt: 'Project 3' },
 		{ src: '/gallery/gallery-4.jpg', alt: 'Project 4' },
 		{ src: '/gallery/gallery-5.jpg', alt: 'Project 5' },
+		{ src: '/gallery/gallery-6.jpg', alt: 'Project 6' },
 	];
 
 	// Scroll to top on page load/refresh
