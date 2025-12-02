@@ -147,6 +147,11 @@ export default function Home() {
 									new places, seeking inspiration in architecture, nature, and the everyday 
 									moments that make life beautiful.
 								</p>
+								<p>
+									I&apos;m always looking for new collaborations and opportunities to create
+									something meaningful. Whether it&apos;s a commercial project or a personal passion
+									piece, I bring the same dedication and attention to detail to everything I do.
+								</p>
 							</div>
 
 							{/* Photo Grid */}
