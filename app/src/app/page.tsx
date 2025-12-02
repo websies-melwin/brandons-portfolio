@@ -8,14 +8,11 @@ export default function Home() {
 	const aboutSectionRef = useRef<HTMLDivElement>(null);
 
 	const sampleImages = [
-		{ src: 'https://picsum.photos/seed/1/800/600', alt: 'Project 1' },
-		{ src: 'https://picsum.photos/seed/2/800/600', alt: 'Project 2' },
-		{ src: 'https://picsum.photos/seed/landscape/800/600', alt: 'Project 3' },
-		{ src: 'https://picsum.photos/seed/4/800/600', alt: 'Project 4' },
-		{ src: 'https://picsum.photos/seed/5/800/600', alt: 'Project 5' },
-		{ src: 'https://picsum.photos/seed/6/800/600', alt: 'Project 6' },
-		{ src: 'https://picsum.photos/seed/7/800/600', alt: 'Project 7' },
-		{ src: 'https://picsum.photos/seed/8/800/600', alt: 'Project 8' },
+		{ src: '/gallery/gallery-1.jpg', alt: 'Project 1' },
+		{ src: '/gallery/gallery-2.jpg', alt: 'Project 2' },
+		{ src: '/gallery/gallery-3.jpg', alt: 'Project 3' },
+		{ src: '/gallery/gallery-4.jpg', alt: 'Project 4' },
+		{ src: '/gallery/gallery-5.jpg', alt: 'Project 5' },
 	];
 
 	// Scroll to top on page load/refresh
