@@ -104,17 +104,18 @@ export default function Home() {
 				className="min-h-screen bg-black px-4 sm:px-6 py-20 sm:py-32"
 			>
 				<div className="max-w-6xl mx-auto">
-					{/* Section Header */}
-					<div className="mb-16 sm:mb-20">
-						<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">About Me</p>
-						<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white mb-6">
-							Hi, I&apos;m <span className="italic">Brandon</span>
-						</h2>
-					</div>
-
 					<div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-						{/* Left - Large Quote */}
+						{/* Left - Header & Quote (Sticky) */}
 						<div className="lg:sticky lg:top-32">
+							{/* Section Header */}
+							<div className="mb-10 sm:mb-12">
+								<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">About Me</p>
+								<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white">
+									Hi, I&apos;m <span className="italic">Brandon</span>
+								</h2>
+							</div>
+
+							{/* Quote */}
 							<div className="relative">
 								<span className="absolute -top-8 -left-4 text-8xl sm:text-9xl font-serif text-white/10">&ldquo;</span>
 								<blockquote className="text-2xl sm:text-3xl md:text-4xl font-serif text-white leading-relaxed pl-4 border-l-2 border-white/20">
