@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import InfiniteGallery from '@/components/InfiniteGallery';
+import FadeIn from '@/components/FadeIn';
 
 export default function Home() {
 	const [galleryComplete, setGalleryComplete] = useState(false);
@@ -108,85 +109,99 @@ export default function Home() {
 						{/* Left - Header & Quote (Sticky) */}
 						<div className="lg:sticky lg:top-32">
 							{/* Section Header */}
-							<div className="mb-10 sm:mb-12">
-								<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">About Me</p>
-								<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white">
-									Hi, I&apos;m <span className="italic">Brandon</span>
-								</h2>
-							</div>
+							<FadeIn delay={0}>
+								<div className="mb-10 sm:mb-12">
+									<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">About Me</p>
+									<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white">
+										Hi, I&apos;m <span className="italic">Brandon</span>
+									</h2>
+								</div>
+							</FadeIn>
 
 							{/* Quote */}
-							<div className="relative">
-								<span className="absolute -top-8 -left-4 text-8xl sm:text-9xl font-serif text-white/10">&ldquo;</span>
-								<blockquote className="text-2xl sm:text-3xl md:text-4xl font-serif text-white leading-relaxed pl-4 border-l-2 border-white/20">
-									I believe every image tells a story, and my job is to make that story unforgettable.
-								</blockquote>
-							</div>
+							<FadeIn delay={150}>
+								<div className="relative">
+									<span className="absolute -top-8 -left-4 text-8xl sm:text-9xl font-serif text-white/10">&ldquo;</span>
+									<blockquote className="text-2xl sm:text-3xl md:text-4xl font-serif text-white leading-relaxed pl-4 border-l-2 border-white/20">
+										I believe every image tells a story, and my job is to make that story unforgettable.
+									</blockquote>
+								</div>
+							</FadeIn>
 							
-							<a
-								href="/about"
-								className="inline-flex items-center gap-3 mt-10 bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 transition-all duration-300"
-							>
-								More about me
-								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-								</svg>
-							</a>
+							<FadeIn delay={300}>
+								<a
+									href="/about"
+									className="inline-flex items-center gap-3 mt-10 bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 transition-all duration-300"
+								>
+									More about me
+									<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+									</svg>
+								</a>
+							</FadeIn>
 						</div>
 
 						{/* Right - Bio & Stats */}
 						<div className="space-y-8">
-							<div className="space-y-6 text-base sm:text-lg text-zinc-400 leading-relaxed">
-								<p>
-									A creative professional passionate about bringing ideas to life through
-									design, photography, and visual storytelling. Based in Ho Chi Minh, Vietnam, I&apos;ve 
-									spent years developing a unique visual style.
-								</p>
-								<p>
-									When I&apos;m not behind the camera or designing, you&apos;ll find me exploring 
-									new places, seeking inspiration in architecture, nature, and the everyday 
-									moments that make life beautiful.
-								</p>
-								<p>
-									I&apos;m always looking for new collaborations and opportunities to create
-									something meaningful. Whether it&apos;s a commercial project or a personal passion
-									piece, I bring the same dedication and attention to detail to everything I do.
-								</p>
-							</div>
+							<FadeIn delay={100} direction="up">
+								<div className="space-y-6 text-base sm:text-lg text-zinc-400 leading-relaxed">
+									<p>
+										A creative professional passionate about bringing ideas to life through
+										design, photography, and visual storytelling. Based in Ho Chi Minh, Vietnam, I&apos;ve 
+										spent years developing a unique visual style.
+									</p>
+									<p>
+										When I&apos;m not behind the camera or designing, you&apos;ll find me exploring 
+										new places, seeking inspiration in architecture, nature, and the everyday 
+										moments that make life beautiful.
+									</p>
+									<p>
+										I&apos;m always looking for new collaborations and opportunities to create
+										something meaningful. Whether it&apos;s a commercial project or a personal passion
+										piece, I bring the same dedication and attention to detail to everything I do.
+									</p>
+								</div>
+							</FadeIn>
 
 							{/* Photo Grid */}
 							<div className="grid grid-cols-2 gap-4 pt-4">
-								<div className="aspect-[4/5] rounded-2xl overflow-hidden">
-									<img
-										src="/gallery/about-1.jpg"
-										alt="Brandon at work"
-										className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-									/>
-								</div>
-								<div className="aspect-[4/5] rounded-2xl overflow-hidden mt-8">
-									<img
-										src="/gallery/about-2.jpg"
-										alt="Behind the scenes"
-										className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-									/>
-								</div>
+								<FadeIn delay={200} direction="up">
+									<div className="aspect-[4/5] rounded-2xl overflow-hidden">
+										<img
+											src="/gallery/about-1.jpg"
+											alt="Brandon at work"
+											className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+										/>
+									</div>
+								</FadeIn>
+								<FadeIn delay={350} direction="up">
+									<div className="aspect-[4/5] rounded-2xl overflow-hidden">
+										<img
+											src="/gallery/about-2.jpg"
+											alt="Behind the scenes"
+											className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+										/>
+									</div>
+								</FadeIn>
 							</div>
 
 							{/* Quick Stats */}
-							<div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10">
-								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">3+</p>
-									<p className="text-sm text-zinc-500">Years Experience</p>
+							<FadeIn delay={400} direction="up">
+								<div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10">
+									<div>
+										<p className="text-3xl sm:text-4xl font-serif text-white">3+</p>
+										<p className="text-sm text-zinc-500">Years Experience</p>
+									</div>
+									<div>
+										<p className="text-3xl sm:text-4xl font-serif text-white">50+</p>
+										<p className="text-sm text-zinc-500">Projects Completed</p>
+									</div>
+									<div>
+										<p className="text-3xl sm:text-4xl font-serif text-white">∞</p>
+										<p className="text-sm text-zinc-500">Creative Ideas</p>
+									</div>
 								</div>
-								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">50+</p>
-									<p className="text-sm text-zinc-500">Projects Completed</p>
-								</div>
-								<div>
-									<p className="text-3xl sm:text-4xl font-serif text-white">∞</p>
-									<p className="text-sm text-zinc-500">Creative Ideas</p>
-								</div>
-							</div>
+							</FadeIn>
 						</div>
 					</div>
 				</div>
@@ -197,23 +212,28 @@ export default function Home() {
 				<div className="max-w-7xl mx-auto">
 					{/* Header with side text */}
 					<div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mb-12 sm:mb-16">
-						<div>
-							<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-3">Services</p>
-							<h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white">
-								What I <span className="italic">Do</span>
-							</h2>
-						</div>
-						<div className="flex items-end">
-							<p className="text-zinc-400 text-base sm:text-lg leading-relaxed">
-								From concept to execution, I bring a unique blend of technical skill and creative vision to every project. Here&apos;s how I can help bring your ideas to life.
-							</p>
-						</div>
+						<FadeIn>
+							<div>
+								<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-2 sm:mb-3">Services</p>
+								<h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white">
+									What I <span className="italic">Do</span>
+								</h2>
+							</div>
+						</FadeIn>
+						<FadeIn delay={150}>
+							<div className="flex items-end">
+								<p className="text-zinc-400 text-base sm:text-lg leading-relaxed">
+									From concept to execution, I bring a unique blend of technical skill and creative vision to every project. Here&apos;s how I can help bring your ideas to life.
+								</p>
+							</div>
+						</FadeIn>
 					</div>
 
 					{/* Creative bento grid for services */}
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 auto-rows-[180px] sm:auto-rows-[200px]">
 						{/* Photography - Large card */}
-						<div className="lg:col-span-5 lg:row-span-2 group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+						<FadeIn delay={0} className="lg:col-span-5 lg:row-span-2">
+						<div className="h-full group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
 							<img 
 								src="https://picsum.photos/seed/neon-city/800/800" 
 								alt="Photography"
@@ -240,9 +260,11 @@ export default function Home() {
 								<div className="absolute top-0 right-0 w-[2px] h-full bg-white/30 origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500 delay-100" />
 							</div>
 						</div>
+						</FadeIn>
 
 						{/* Videography - Medium card */}
-						<div className="lg:col-span-7 group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+						<FadeIn delay={100} className="lg:col-span-7">
+						<div className="h-full group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
 							<img 
 								src="https://picsum.photos/seed/music-filming/800/400" 
 								alt="Videography"
@@ -264,9 +286,11 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
+						</FadeIn>
 
 						{/* Design - Medium card */}
-						<div className="lg:col-span-4 group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-gradient-to-br from-zinc-800 to-zinc-900">
+						<FadeIn delay={200} className="lg:col-span-4">
+						<div className="h-full group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-gradient-to-br from-zinc-800 to-zinc-900">
 							<div className="absolute inset-0 opacity-30">
 								<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-white/20 rounded-full group-hover:scale-150 transition-transform duration-700" />
 								<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white/10 rounded-full group-hover:scale-125 transition-transform duration-700 delay-100" />
@@ -287,9 +311,11 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
+						</FadeIn>
 
 						{/* Creative Direction - Small card */}
-						<a href="/projects" className="lg:col-span-3 group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-white block">
+						<FadeIn delay={300} className="lg:col-span-3">
+						<a href="/projects" className="h-full group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-white block">
 							<div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-between">
 								<div className="flex items-center justify-between">
 									<div className="w-10 h-10 rounded-full bg-black/10 flex items-center justify-center">
@@ -311,6 +337,7 @@ export default function Home() {
 								</svg>
 							</div>
 						</a>
+						</FadeIn>
 					</div>
 				</div>
 			</section>
@@ -319,89 +346,123 @@ export default function Home() {
 			<section className="bg-zinc-950 px-4 sm:px-6 py-20 sm:py-32">
 				<div className="max-w-7xl mx-auto">
 					{/* Header */}
-					<div className="grid lg:grid-cols-2 gap-6 lg:gap-16 mb-14 sm:mb-20">
-						<div>
-							<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">Portfolio</p>
-							<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white">
-								Selected <span className="italic">Works</span>
-							</h2>
-						</div>
-						<div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 lg:justify-end">
-							<p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-md lg:hidden">
-								A curated collection of my best work across photography, design, and creative direction.
-							</p>
-							<a 
-								href="/projects" 
-								className="inline-flex items-center justify-center gap-3 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+					<div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12 sm:mb-16">
+						<FadeIn>
+							<div>
+								<p className="text-zinc-500 text-xs sm:text-sm uppercase tracking-widest mb-3">Portfolio</p>
+								<h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-white">
+									Selected <span className="italic">Works</span>
+								</h2>
+							</div>
+						</FadeIn>
+						<FadeIn delay={150}>
+							<a
+								href="/projects"
+								className="inline-flex items-center justify-center gap-3 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-zinc-100 hover:scale-105 transition-all duration-300"
 							>
-								View all
+								View all projects
 								<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
 								</svg>
 							</a>
-						</div>
+						</FadeIn>
 					</div>
 
-					{/* Projects Grid */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						{/* Featured Project - Large */}
-						<div className="md:col-span-2 group relative rounded-3xl overflow-hidden cursor-pointer">
-							<div className="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9]">
-								<img
-									src="https://picsum.photos/seed/featured-wide/1600/700"
-									alt="Featured Project"
-									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-								/>
+					{/* Masonry Gallery - 3 columns with bottom-aligned layout */}
+					<a href="/projects" className="block">
+						<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+							{/* Column 1 - Mobile: 1/1 + 4/5 + 3/4 = 2.55 | Desktop: 4/5 + 3/4 + 1/1 = 2.55 */}
+							<div className="flex flex-col gap-4">
+								<FadeIn delay={0}>
+									<div className="aspect-[1/1] md:aspect-[4/5] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/urban-night-photo/800/1000" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
+									</div>
+								</FadeIn>
+								<FadeIn delay={100}>
+									<div className="aspect-[4/5] md:aspect-[3/4] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/street-cinematic-mood/800/1000" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
+									</div>
+								</FadeIn>
+								<FadeIn delay={200}>
+									<div className="aspect-[3/4] md:aspect-[1/1] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/fashion-editorial-mag/800/800" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
+									</div>
+								</FadeIn>
 							</div>
-							<div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-							<div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-								<div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-									<div>
-										<span className="inline-block backdrop-blur-xl bg-white/10 border border-white/20 px-3 py-1 rounded-full text-white/80 text-xs mb-3">Featured Project</span>
-										<h3 className="text-white text-2xl sm:text-3xl md:text-4xl font-serif mb-2 group-hover:translate-x-2 transition-transform duration-300">Urban Perspectives</h3>
-										<p className="text-white/70 text-sm sm:text-base max-w-xl">A visual exploration of city life, architecture, and the stories hidden in urban landscapes.</p>
+							{/* Column 2 - Mobile: 3/4 + 1/1 + 4/5 = 2.55 | Desktop: 4/5 + 3/4 + 1/1 = 2.55 */}
+							<div className="flex flex-col gap-4">
+								<FadeIn delay={50}>
+									<div className="aspect-[3/4] md:aspect-[4/5] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/portrait-moody-shot/800/1000" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
 									</div>
-									<div className="w-12 h-12 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 flex-shrink-0">
-										<svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-										</svg>
+								</FadeIn>
+								<FadeIn delay={150}>
+									<div className="aspect-[1/1] md:aspect-[3/4] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/neon-city-vibes-night/800/1000" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
 									</div>
-								</div>
+								</FadeIn>
+								<FadeIn delay={250}>
+									<div className="aspect-[4/5] md:aspect-[1/1] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/landscape-dramatic-sky/800/800" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
+									</div>
+								</FadeIn>
+							</div>
+							{/* Column 3 - hidden on mobile */}
+							<div className="hidden md:flex flex-col gap-4">
+								<FadeIn delay={75}>
+									<div className="aspect-[1/1] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/architecture-minimal-bw/800/800" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
+									</div>
+								</FadeIn>
+								<FadeIn delay={175}>
+									<div className="aspect-[3/4] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/creative-studio-work/800/1000" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
+									</div>
+								</FadeIn>
+								<FadeIn delay={275}>
+									<div className="aspect-[4/5] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer">
+										<img src="https://picsum.photos/seed/abstract-art-modern/800/1000" alt="Portfolio work" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+										<div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+										<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+											<svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+										</div>
+									</div>
+								</FadeIn>
 							</div>
 						</div>
-						
-						{/* Project Cards */}
-						{[
-							{ title: "Brand Identity", category: "Design", seed: "project-1" },
-							{ title: "Portrait Series", category: "Photography", seed: "project-2" },
-							{ title: "Music Video", category: "Videography", seed: "project-3" },
-							{ title: "Product Launch", category: "Creative Direction", seed: "project-4" },
-						].map((project, i) => (
-							<div 
-								key={i}
-								className="group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer"
-							>
-								<div className="aspect-[4/3]">
-									<img
-										src={`https://picsum.photos/seed/${project.seed}/800/600`}
-										alt={project.title}
-										className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-									/>
-								</div>
-								<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-								<div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-									<span className="text-white/60 text-xs uppercase tracking-wider">{project.category}</span>
-									<h3 className="text-white text-xl sm:text-2xl font-serif mt-1 group-hover:translate-x-2 transition-transform duration-300">{project.title}</h3>
-								</div>
-								{/* Hover overlay */}
-								<div className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 backdrop-blur-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-									<svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-									</svg>
-								</div>
-							</div>
-						))}
-					</div>
+					</a>
 				</div>
 			</section>
 
@@ -418,6 +479,7 @@ export default function Home() {
 
 				<div className="max-w-5xl mx-auto relative">
 					{/* Main CTA Card */}
+					<FadeIn>
 					<div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-12 md:p-16 text-center">
 						<div className="inline-flex items-center gap-2 backdrop-blur-xl bg-white/10 border border-white/20 px-4 py-2 rounded-full mb-6 sm:mb-8">
 							<span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -466,6 +528,7 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
+					</FadeIn>
 				</div>
 			</section>
 
